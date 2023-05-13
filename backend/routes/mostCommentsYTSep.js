@@ -5,7 +5,9 @@ const YoutubeSep22 = require("../models/YoutubeSep22")
 
 router.get('/', async (req, res) => {
     // let result = YoutubeSep22.find({});
-    const docs = await YoutubeSep22.find({AvgViews: {$lte : 10}}).sort({AvgViews: -1}).limit(1).select('Youtuber -_id');
+    const docs = await YoutubeSep22.find({AvgComments: {$gte : 10}}).sort({AvgComments: -1}).limit(3).select('Youtuber');
+    
+    
     // doc_relevant = docs.AvgViews.AvgViews
 
     console.log(docs);

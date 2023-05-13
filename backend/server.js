@@ -19,7 +19,8 @@ const port = 5000
 app.use(express.json());
 app.use(cors());
 
-app.use('/api/demo', require('./routes/demo'));
+app.use('/api/mostLikesYTSep', require('./routes/mostLikesYTSep'));
+app.use('/api/mostCommentsYTSep', require('./routes/mostCommentsYTSep'));
 // app.use('/api/responses', require('./routes/responses'));
 // app.use('/api/questions', require('./routes/questions'));
 app.listen(port, () => {
