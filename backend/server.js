@@ -24,7 +24,17 @@ app.use('/api/mostCommentsYTSep', require('./routes/YTSep/mostCommentsYTSep'));
 app.use('/api/mostViewsYTSep', require('./routes/YTSep/mostViewsYTSep'));
 app.use('/api/mostSubscribersYTSep', require('./routes/YTSep/mostSubscribersYTSep'));
 app.use('/api/mostLandCYTSep', require('./routes/YTSep/mostLandCYTSep'));
-app.use('/api/popularByCategory', require('./routes/YTSep/popularByCategory'));
+app.use('/api/popularByCategory', require('./routes/YTSep/popularByCategoryYTSep'));
+
+app.use('/api/mostSubscribersInsSep', require('./routes/InsSep/mostSubscribersInsSep'));
+app.use('/api/mostEngagementInsSep', require('./routes/InsSep/mostEngagementInsSep'));
+
+
+app.use('/api/mostSubscribersTTSep', require('./routes/TiktokSep/mostSubscribersTTSep'));
+app.use('/api/mostViewsTTSep', require('./routes/TiktokSep/mostViewsTTSep'));
+app.use('/api/mostLikesTTSep', require('./routes/TiktokSep/mostLikesTTSep'));
+app.use('/api/mostCommentsTTSep', require('./routes/TiktokSep/mostCommentsTTSep'));
+
 // app.use('/api/responses', require('./routes/responses'));
 // app.use('/api/questions', require('./routes/questions'));
 app.listen(port, () => {

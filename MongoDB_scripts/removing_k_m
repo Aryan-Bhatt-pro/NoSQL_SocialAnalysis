@@ -1,16 +1,16 @@
-db["instagramsep22"].updateMany(
-   { "EngagementAverage": { "$type": "string" } },
+db.tiktoksep22.updateMany(
+   { "CommentsAvg": { "$type": "string" } },
    [
      {
        "$set": {
-         "EngagementAverage": {
+         "CommentsAvg": {
            $toInt: {
              $cond: {
-               if: { $gte: [ { $indexOfBytes: ["$EngagementAverage", "K"] }, 0 ] },
+               if: { $gte: [ { $indexOfBytes: ["$CommentsAvg", "K"] }, 0 ] },
                then: {
                  $multiply: [
                    {
-                     $toDouble: { $arrayElemAt: [ { $split: [ "$EngagementAverage", "K" ] }, 0 ] }
+                     $toDouble: { $arrayElemAt: [ { $split: [ "$CommentsAvg", "K" ] }, 0 ] }
                    },
                    1000
                  ]
@@ -18,11 +18,11 @@ db["instagramsep22"].updateMany(
 
                else: { 
                 $cond: { 
-                if: { $gte: [ { $indexOfBytes: ["$EngagementAverage", "M"] }, 0] },
+                if: { $gte: [ { $indexOfBytes: ["$CommentsAvg", "M"] }, 0] },
                 then: {
                     $multiply: [
                         {
-                            $toDouble: { $arrayElemAt: [ { $split: [ "$EngagementAverage", "M" ] }, 0 ] }
+                            $toDouble: { $arrayElemAt: [ { $split: [ "$CommentsAvg", "M" ] }, 0 ] }
                         },
                         1000000
                     ]
