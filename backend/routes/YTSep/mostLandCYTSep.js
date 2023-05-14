@@ -1,7 +1,7 @@
 const express = require("express");
 // const { db } = require("../models/TextQuestion");
 const router = express.Router();
-const YoutubeSep22 = require("../models/YoutubeSep22")
+const YoutubeSep22 = require("../../models/YoutubeSep22")
 
 router.get('/', async (req, res) => {
     // let result = YoutubeSep22.find({});
@@ -30,6 +30,7 @@ router.get('/', async (req, res) => {
     // doc_relevant = docs.AvgViews.AvgViews
 
     console.log(docs);
+    res.json(docs)
     // YoutubeSep22.find({}).then((err, person) =>{
     //     if (err) return (err);
     //     // Prints "Space Ghost is a talk show host".
