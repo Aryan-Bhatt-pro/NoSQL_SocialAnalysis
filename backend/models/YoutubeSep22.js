@@ -1,8 +1,8 @@
 const mongoose = require('mongoose');
 
 const YoutubeSchema = new mongoose.Schema({
-  S: {
-    type: Object,
+  "S no": {
+    type: Number,
   },
   Name: {
     type: String,
@@ -17,21 +17,21 @@ const YoutubeSchema = new mongoose.Schema({
     // required: true
   },
   Subscribers: {
-    type: String,
+    type: Number,
     // required: true
   },
   Category_2: {
     type: String,
   },
-  AvgViews: {
+  "AvgViews": {
     type: Number,
     // required: true
   },
-  AvgLikes: {
-    type: String,
+  "AvgLikes": {
+    type: Number,
     // required: true
   },
-  AvgComments: {
+  "AvgComments": {
     type: Number
     // required: true
   }

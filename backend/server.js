@@ -21,6 +21,9 @@ app.use(cors());
 
 app.use('/api/mostLikesYTSep', require('./routes/mostLikesYTSep'));
 app.use('/api/mostCommentsYTSep', require('./routes/mostCommentsYTSep'));
+app.use('/api/mostViewsYTSep', require('./routes/mostViewsYTSep'));
+app.use('/api/mostSubscribersYTSep', require('./routes/mostSubscribersYTSep'));
+app.use('/api/mostLandCYTSep', require('./routes/mostLandCYTSep'));
 // app.use('/api/responses', require('./routes/responses'));
 // app.use('/api/questions', require('./routes/questions'));
 app.listen(port, () => {

@@ -9,9 +9,19 @@ const getMostLikes = (req, res) => {
     // if(month == Sep && youtube )
       axios.get("http://localhost:5000/api/mostLikesYTSep")
 }
+const getMostLandC = (req, res) => {
+    // if(month == Sep && youtube )
+      axios.get("http://localhost:5000/api/mostLandCYTSep")
+}
 
 const getMostComments = (req, res) => {
   axios.get("http://localhost:5000/api/mostCommentsYTSep")
+}
+const getMostViews = (req, res) => {
+  axios.get("http://localhost:5000/api/mostViewsYTSep")
+}
+const getMostSubscribers = (req, res) => {
+  axios.get("http://localhost:5000/api/mostSubscribersYTSep")
 }
 
 // define set month to september using states
@@ -24,6 +34,9 @@ function App() {
       <header className="App-header">
         <button type="button" class="btn btn-primary" style={{marginBottom: 10}} onClick={getMostLikes}>MostLikes</button>
         <button type="button" class="btn btn-primary" style={{marginTop: 10}} onClick={getMostComments}>MostComments</button>
+        <button type="button" class="btn btn-primary" style={{marginTop: 10}} onClick={getMostViews}>MostViews</button>
+        <button type="button" class="btn btn-primary" style={{marginTop: 10}} onClick={getMostSubscribers}>MostSubscribers</button>
+        <button type="button" class="btn btn-primary" style={{marginTop: 10}} onClick={getMostLandC}>MostLikesandComments</button>
 
       <div>
       <DropdownButton id="dropdown-basic-button" title="Select Month">
