@@ -1,0 +1,50 @@
+db["instagramsep22"].updateMany(
+   { "EngagementAverage": { "$type": "string" } },
+   [
+     {
+       "$set": {
+         "EngagementAverage": {
+           $toInt: {
+             $cond: {
+               if: { $gte: [ { $indexOfBytes: ["$EngagementAverage", "K"] }, 0 ] },
+               then: {
+                 $multiply: [
+                   {
+                     $toDouble: { $arrayElemAt: [ { $split: [ "$EngagementAverage", "K" ] }, 0 ] }
+                   },
+                   1000
+                 ]
+               },
+
+               else: { 
+                $cond: { 
+                if: { $gte: [ { $indexOfBytes: ["$EngagementAverage", "M"] }, 0] },
+                then: {
+                    $multiply: [
+                        {
+                            $toDouble: { $arrayElemAt: [ { $split: [ "$EngagementAverage", "M" ] }, 0 ] }
+                        },
+                        1000000
+                    ]
+                },
+                else: "$$REMOVE"
+              }
+             }
+            }
+           }
+         }
+       }
+     }
+   ]
+)
+
+// -----------------------------------------------------------
+
+db.instagramsep22.updateMany(
+  {},
+  { $rename: { "Engagement average\n": "EngagementAverage" } }
+)
+
+
+
+db["YoutubeSep22"].updateMany({}, { $unset: { "AvgCommments": "" } })
