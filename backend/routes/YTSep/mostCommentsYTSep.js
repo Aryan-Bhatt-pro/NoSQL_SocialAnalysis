@@ -20,7 +20,7 @@ router.post('/', async (req, res) => {
                 $sort: { "AvgComments": -1 }
             },
             {
-                $limit: 3
+                $limit: 4
             },
             {
                 $project: {
@@ -32,7 +32,7 @@ router.post('/', async (req, res) => {
         ]);
     }
     else {
-        docs = await YoutubeSep22.find({ "AvgComments": { $gte: 10 } }).sort({ "AvgComments": -1 }).limit(3).select('Youtuber AvgComments -_id');
+        docs = await YoutubeSep22.find({ "AvgComments": { $gte: 10 } }).sort({ "AvgComments": -1 }).limit(4).select('Youtuber AvgComments -_id');
     }
     
     // doc_relevant = docs.AvgViews.AvgViews

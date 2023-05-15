@@ -20,7 +20,7 @@ router.post('/', async (req, res) => {
                 $sort: { "Subscribers": -1 }
             },
             {
-                $limit: 3
+                $limit: 4
             },
             {
                 $project: {
@@ -32,7 +32,7 @@ router.post('/', async (req, res) => {
         ]);
     }
     else {
-        docs = await YoutubeSep22.find({ "Subscribers": { $gte: 10 } }).sort({ "Subscribers": -1 }).limit(3).select('Youtuber Subscribers -_id');
+        docs = await YoutubeSep22.find({ "Subscribers": { $gte: 10 } }).sort({ "Subscribers": -1 }).limit(4).select('Youtuber Subscribers -_id');
     }
 
     

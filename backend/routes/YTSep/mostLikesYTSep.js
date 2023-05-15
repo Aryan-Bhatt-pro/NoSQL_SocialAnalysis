@@ -32,7 +32,7 @@ router.post('/', async (req, res) => {
         ]);
     }
     else {
-        docs = await YoutubeSep22.find({ "AvgLikes": { $gte: 5 } }).sort({ "AvgLikes": -1 }).limit(3).select('Youtuber AvgLikes -_id');
+        docs = await YoutubeSep22.find({ "AvgLikes": { $gte: 5 } }).sort({ "AvgLikes": -1 }).limit(4).select('Youtuber AvgLikes -_id');
     }
 
     // doc_relevant = docs.AvgViews.AvgViews

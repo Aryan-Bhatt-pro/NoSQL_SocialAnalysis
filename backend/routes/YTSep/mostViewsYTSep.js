@@ -20,7 +20,7 @@ router.post('/', async (req, res) => {
                 $sort: { "AvgViews": -1 }
             },
             {
-                $limit: 3
+                $limit: 4
             },
             {
                 $project: {
@@ -32,7 +32,7 @@ router.post('/', async (req, res) => {
         ]);
     }
     else {
-        docs = await YoutubeSep22.find({ "AvgViews": { $gte: 10 } }).sort({ "AvgViews": -1 }).limit(3);
+        docs = await YoutubeSep22.find({ "AvgViews": { $gte: 10 } }).sort({ "AvgViews": -1 }).limit(4);
     }
     
     // doc_relevant = docs.AvgViews.AvgViews

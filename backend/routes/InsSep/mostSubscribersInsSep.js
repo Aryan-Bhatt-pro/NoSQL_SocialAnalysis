@@ -21,7 +21,7 @@ router.post('/', async (req, res) => {
                 $sort: { "Subscribers": -1 }
             },
             {
-                $limit: 3
+                $limit: 4
             },
             {
                 $project: {
@@ -33,7 +33,7 @@ router.post('/', async (req, res) => {
         ]);
     }
     else {
-        docs = await InstagramSep22.find({ "Subscribers": { $gte: 10 } }).sort({ "subscribers": -1 }).limit(3).select('Name Subscribers -_id');
+        docs = await InstagramSep22.find({ "Subscribers": { $gte: 10 } }).sort({ "subscribers": -1 }).limit(4).select('Name Subscribers -_id');
     }
     
     // to access the current category

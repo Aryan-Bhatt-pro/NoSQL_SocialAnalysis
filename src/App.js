@@ -1,7 +1,22 @@
 import logo from "./logo.svg";
+import { useEffect, useRef } from "react";
 import React, { useState } from "react";
 import "./App.css";
+import Chart from "chart.js/auto";
 import Dropdown from "react-bootstrap/Dropdown";
+import PieChartCommentsTT from "./PiechartCommentsTT";
+import PieChartViewsTT from "./PieChartViewsTT";
+import PieChartViewsYT from "./PiechartViewsYT";
+import PieChartLikesYT from "./PiechartLikesYT";
+import PieChartCommentsYT from "./PieChartCommentsYT";
+import PieChartSubscribersYT from "./PieChartSubscribersYT";
+import PieChartLandCYT from "./PiechartLandCYT";
+import PieChartPopuCategoryYT from "./PiechartPopuCategoryYT";
+import PieChartSubscribersInsta from "./PiechartSubscribersInsta";
+import PieChartEngInsta from "./PieChartEngInsta";
+import PieChartSubscribersTT from "./PieChartSubscribersTT";
+import PieChartLikesTT from "./PieChartLikesTT";
+
 // import {My_Button} from "./My_Button";
 import DropdownButton from "react-bootstrap/DropdownButton";
 import "bootstrap/dist/css/bootstrap.min.css";
@@ -12,6 +27,8 @@ import axios from "axios";
 // import { set } from "mongoose";
 
 function App() {
+
+  const chartRef = useRef(null);
     // youtube states
   const [mostLikesYTSep, setMostLikesYTSep] = useState([]);
   const [mostCommentsYTSep, setMostCommentsYTSep] = useState([]);
@@ -22,6 +39,7 @@ function App() {
 
 
   const [currentCategory, setCurrentCategory] = useState('All')
+  const [chartData, setChartData] = useState(null);
   
   
   // insta states
@@ -37,6 +55,8 @@ function App() {
 
 
   const [currentSocialMedia, setCurrentSocialMedia] = useState("Youtube");
+
+  
 
   const changeHandler = (e) => {
     setCurrentCategory(e.target.value)
@@ -108,10 +128,16 @@ function App() {
     });
   };
   const getMostViewsYt = (req, res) => {
+    var startTime = new Date().getTime();
     axios.post("http://localhost:5000/api/mostViewsYTSep",{currentCategory}).then((response) => {
       let data = response.data;
 
+      var endTime = new Date().getTime();
+      var duration = endTime - startTime;
+      console.log('Request took', duration, 'milliseconds');
+
       setMostViewsYTSep(data);
+      
 
       setMostLikesYTSep([]);
       setMostSubscribersYTSep([]);
@@ -123,9 +149,15 @@ function App() {
     });
   };
   const getPopularCategoryYt = (req, res) => {
+    var startTime = new Date().getTime();
     axios
       .get("http://localhost:5000/api/popularByCategoryYTSep")
       .then((response) => {
+
+        var endTime = new Date().getTime();
+        var duration = endTime - startTime;
+        console.log('Request took', duration, 'milliseconds');
+
         let data = response.data;
         setMostPopucategoryYT(data);
 
@@ -139,19 +171,31 @@ function App() {
   // -----------------------------------------------------------------------------------------------------
   // instagram
   const getMostSubscribersIns = (req, res) => {
+    var startTime = new Date().getTime();
     axios
       .post("http://localhost:5000/api/mostSubscribersInsSep", {currentCategory})
       .then((response) => {
         let data = response.data;
+
+        var endTime = new Date().getTime();
+        var duration = endTime - startTime;
+        console.log('Request took', duration, 'milliseconds');
+
         setMostSubscribersInsta(data);
         setMostEngagementInsta([]);
       });
   };
   const getMostEngagementIns = (req, res) => {
+    var startTime = new Date().getTime();
     axios
       .post("http://localhost:5000/api/mostEngagementInsSep", {currentCategory})
       .then((response) => {
         let data = response.data;
+        
+        var endTime = new Date().getTime();
+        var duration = endTime - startTime;
+        console.log('Request took', duration, 'milliseconds');
+
         setMostEngagementInsta(data);
         setMostSubscribersInsta([]);
       });
@@ -173,13 +217,20 @@ function App() {
       });
   };
   const getMostViewsTT = (req, res) => {
+    var startTime = new Date().getTime();
     axios.get("http://localhost:5000/api/mostViewsTTSep").then((response) => {
       let data = response.data;
       setMostViewsTT(data);
 
+      
+      var endTime = new Date().getTime();
+      var duration = endTime - startTime;
+      console.log('Request took', duration, 'milliseconds');
+
       setMostLikesTT([]);
       setMostSubscribersTT([]);
       setMostCommentsTT([]);
+      // setChartData(null);
       // setMostPopucategory(data);
     });
   };
@@ -194,15 +245,23 @@ function App() {
     });
   };
   const getMostCommentsTT = (req, res) => {
+    var startTime = new Date().getTime(); 
     axios
       .get("http://localhost:5000/api/mostCommentsTTSep")
       .then((response) => {
         let data = response.data;
         setMostCommentsTT(data);
+        setChartData(data);
+
+        
+        var endTime = new Date().getTime();
+        var duration = endTime - startTime;
+        console.log('Request took', duration, 'milliseconds');
 
         setMostLikesTT([]);
         setMostViewsTT([]);
         setMostSubscribersTT([]);
+        setChartData(null)
       });
   };
 
@@ -340,35 +399,42 @@ function App() {
             <strong>Avg Views: {youtuber.AvgViews}</strong>
           </div>
         ))}
+        {mostViewsYTSep.length > 0 && <PieChartViewsYT chartData={mostViewsYTSep} />}
         {mostLikesYTSep.map((youtuber) => (
           <div>
             <strong>Youtuber: {youtuber.Youtuber}, </strong>
             <strong>Avg Likes: {youtuber.AvgLikes}</strong>
           </div>
         ))}
+        {mostLikesYTSep.length > 0 && <PieChartLikesYT chartData={mostLikesYTSep} />}
         {mostLikedAndCommYTSep.map((youtuber) => (
           <div>
             <strong>Youtuber: {youtuber.Youtuber}, </strong>
             <strong>Combined Likes And Comments: {youtuber.combinedLikesAndComments}</strong>
           </div>
         ))}
+        {mostLikedAndCommYTSep.length > 0 && <PieChartLandCYT chartData={mostLikedAndCommYTSep} />}
         {mostSubscribersYTSep.map((youtuber) => (
           <div>
             <strong>Youtuber: {youtuber.Youtuber}, </strong>
             <strong>Subscribers: {youtuber.Subscribers}</strong>
           </div>
         ))}
+        {mostSubscribersYTSep.length > 0 && <PieChartSubscribersYT chartData={mostSubscribersYTSep} />}
         {mostCommentsYTSep.map((youtuber) => (
           <div>
             <strong>Youtuber: {youtuber.Youtuber}, </strong>
             <strong>Avg Comments: {youtuber.AvgComments}</strong>
           </div>
         ))}
+        {mostCommentsYTSep.length > 0 && <PieChartCommentsYT chartData={mostCommentsYTSep} />}
         {mostPopuCategoryYT.map((youtuber) => (
           <div>
-            <strong>{youtuber._id}</strong>
+            <strong>Category: {youtuber.Category }</strong>
+            <strong>; Channel Count: {youtuber.count }</strong>
           </div>
         ))}
+        {mostPopuCategoryYT.length > 0 && <PieChartPopuCategoryYT chartData={mostPopuCategoryYT} />}
           </div>
         )}
 
@@ -446,12 +512,14 @@ function App() {
             <strong>, Followers: {insta.Subscribers}</strong>
           </div>
         ))}
+        {mostSubscribersInsta.length > 0 && <PieChartSubscribersInsta chartData={mostSubscribersInsta} />}
         {MostEngagementInsta.map((insta) => (
           <div>
             <strong>Name: {insta.Name}</strong>
             <strong>, Engagement: {insta.AuthenticEngagement}</strong>
           </div>
         ))}
+        {MostEngagementInsta.length > 0 && <PieChartEngInsta chartData={MostEngagementInsta} />}
           </div>
         )}
         {/* ------------------------------------------------------------------------------------------------ */}
@@ -490,31 +558,36 @@ function App() {
             >
               MostCommentsTT
             </button>
-
+        
           {mostLikesTT.map((tt) => (
-          <div>
+            <div>
             <strong>Name: {tt.Name}</strong>
             <strong>, Avg Likes: {tt.LikesAvg}</strong>
           </div>
         ))}
+        {mostLikesTT.length > 0 && <PieChartLikesTT chartData={mostLikesTT} />}
         {mostCommentsTT.map((tt) => (
           <div>
             <strong>Name: {tt.Name}</strong>
             <strong>, Avg Comments: {tt.CommentsAvg}</strong>
           </div>
         ))}
+        {mostCommentsTT.length > 0 && <PieChartCommentsTT chartData={mostCommentsTT} />}
+        
         {mostViewsTT.map((tt) => (
           <div>
             <strong>Name: {tt.Name}</strong>
             <strong>, Avg Views: {tt.ViewsAvg}</strong>
           </div>
         ))}
+        {mostViewsTT.length > 0 && <PieChartViewsTT chartData={mostViewsTT} />}
         {mostSubscribersTT.map((tt) => (
           <div>
             <strong>Name: {tt.Name}</strong>
             <strong>, Followers: {tt.Subscribers}</strong>
           </div>
         ))}
+        {mostSubscribersTT.length > 0 && <PieChartSubscribersTT chartData={mostSubscribersTT} />}
           </div>
         )}
         {/* <strong>{mostViewsYTSep}</strong> */}

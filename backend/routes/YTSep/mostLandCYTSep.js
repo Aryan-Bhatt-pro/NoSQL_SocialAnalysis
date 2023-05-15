@@ -25,7 +25,7 @@ router.post('/', async (req, res) => {
         $sort: { combinedLikesAndComments: -1 }
       },
       {
-        $limit: 3
+        $limit: 4
       },
       {
         $project: {
@@ -47,7 +47,7 @@ router.post('/', async (req, res) => {
         $sort: { combinedLikesAndComments: -1 }
       },
       {
-        $limit: 3
+        $limit: 4
       },
       {
         $project: {
