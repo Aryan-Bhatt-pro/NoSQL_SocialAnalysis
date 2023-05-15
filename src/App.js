@@ -19,9 +19,12 @@ function App() {
   const [mostViewsYTSep, setMostViewsYTSep] = useState([]);
   const [mostLikedAndCommYTSep, setMostLikedAndCommYTSep] = useState([]);
   const [mostPopuCategoryYT, setMostPopucategoryYT] = useState([]);
-  const [currentCategory, setCurrentCategory] = useState('lode')
-  // insta states
 
+
+  const [currentCategory, setCurrentCategory] = useState('All')
+  
+  
+  // insta states
   const [mostSubscribersInsta, setMostSubscribersInsta] = useState([]);
   const [MostEngagementInsta, setMostEngagementInsta] = useState([]);
 
@@ -68,7 +71,7 @@ function App() {
   };
   const getMostLandCYt = (req, res) => {
     // if(month == Sep && youtube )
-    axios.get("http://localhost:5000/api/mostLandCYTSep").then((response) => {
+    axios.post("http://localhost:5000/api/mostLandCYTSep", {currentCategory}).then((response) => {
       let data = response.data;
       setMostLikedAndCommYTSep(data);
 
@@ -81,7 +84,7 @@ function App() {
     });
   };
   const getMostCommentsYt = (req, res) => {
-    axios.get("http://localhost:5000/api/mostCommentsYTSep").then((response) => {
+    axios.post("http://localhost:5000/api/mostCommentsYTSep", {currentCategory}).then((response) => {
       let data = response.data;
       setMostCommentsYTSep(data);
 
@@ -93,7 +96,7 @@ function App() {
     });
   };
   const getMostSubscribersYt = (req, res) => {
-    axios.get("http://localhost:5000/api/mostSubscribersYTSep").then((response) => {
+    axios.post("http://localhost:5000/api/mostSubscribersYTSep", {currentCategory}).then((response) => {
       let data = response.data;
       setMostSubscribersYTSep(data);
 
@@ -105,7 +108,7 @@ function App() {
     });
   };
   const getMostViewsYt = (req, res) => {
-    axios.get("http://localhost:5000/api/mostViewsYTSep").then((response) => {
+    axios.post("http://localhost:5000/api/mostViewsYTSep",{currentCategory}).then((response) => {
       let data = response.data;
 
       setMostViewsYTSep(data);
@@ -229,8 +232,58 @@ function App() {
           
         </div>
 
+        
+
+        {/* Music & Dance
+            Movies
+            Animation 
+            Video games
+            News & Politics */}
+
         {currentSocialMedia === "Youtube" && (
           <div>
+            <DropdownButton
+            id="dropdown-basic-button"
+            title="Select Category"
+            value = {currentCategory}
+              style={{ marginTop: 10 }} onChange={changeHandler}>
+
+            <Dropdown.Item href="#/action-1" value="All" onClick={() => {
+              setCurrentCategory("All")
+            }}>
+              All
+            </Dropdown.Item>
+            <Dropdown.Item href="#/action-2" value="Music & Dance" onClick={() => {
+              setCurrentCategory("Music & Dance")
+            }}>
+              Music & Dance
+            </Dropdown.Item>
+            
+            <Dropdown.Item href="#/action-3" value="Movies" onClick={() => {
+              setCurrentCategory("Movies")
+            }}>
+              Movies
+            </Dropdown.Item>
+            {/* Here instead of getMostLikesYt do setMonthToSeptember  */}
+            <Dropdown.Item href="#/action-4" value="Animation" onClick={() => {
+              setCurrentCategory("Animation")
+            }}>
+              Animation
+            </Dropdown.Item>
+            <Dropdown.Item href="#/action-5" value="Video games" onClick={() => {
+              setCurrentCategory("Video games")
+            }}>
+              Video games
+            </Dropdown.Item>
+            <Dropdown.Item href="#/action-6" value="News & Politics" onClick={() => {
+              setCurrentCategory("News & Politics")
+            }}>
+              News & Politics
+            </Dropdown.Item>
+            </DropdownButton>
+
+
+
             <button
               type="button"
               class="btn btn-primary"
@@ -327,24 +380,49 @@ function App() {
             id="dropdown-basic-button"
             title="Select Category"
             value = {currentCategory}
-          style={{marginTop: 10}} onChange={changeHandler}>
-            <Dropdown.Item href="/api/mostLikesYTSep" value="Yotube" onClick={() => {
-              setCurrentCategory("Yotube")
+              style={{ marginTop: 10 }} onChange={changeHandler}>
+              
+              {/* Cinema & Actors/actresses
+                  Lifestyle
+                  Sports with a ball
+                  Modeling 
+                  Shows */}
+              
+            <Dropdown.Item href="#/action-1" value="All" onClick={() => {
+              setCurrentCategory("All")
             }}>
-              Youtube
-            </Dropdown.Item>{" "}
+              All
+            </Dropdown.Item>
+            <Dropdown.Item href="#/action-2" value="Cinema & Actors/actresses" onClick={() => {
+              setCurrentCategory("Cinema & Actors/actresses")
+            }}>
+              Cinema & Actors/actresses
+            </Dropdown.Item>
+            
+            <Dropdown.Item href="#/action-3" value="Lifestyle" onClick={() => {
+              setCurrentCategory("Lifestyle")
+            }}>
+              Lifestyle
+            </Dropdown.Item>
             {/* Here instead of getMostLikesYt do setMonthToSeptember  */}
-            <Dropdown.Item href="#/action-2" value="Instagram" onClick={() => {
-              setCurrentCategory("Instagram")
+            <Dropdown.Item href="#/action-4" value="Sports with a ball" onClick={() => {
+              setCurrentCategory("Sports with a ball")
             }}>
-              Instagram
+              Sports with a ball
             </Dropdown.Item>
-            <Dropdown.Item href="#/action-3" value="TickTok" onClick={() => {
-              setCurrentCategory("TickTok")
+            <Dropdown.Item href="#/action-5" value="Modeling" onClick={() => {
+              setCurrentCategory("Modeling")
             }}>
-              TickTok
+              Modeling
             </Dropdown.Item>
-          </DropdownButton>
+            <Dropdown.Item href="#/action-6" value="Shows" onClick={() => {
+              setCurrentCategory("Shows")
+            }}>
+              Shows
+            </Dropdown.Item>
+            </DropdownButton>
+            
+
             <button
               type="button"
               class="btn btn-primary"
