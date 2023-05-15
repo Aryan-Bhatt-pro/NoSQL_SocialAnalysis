@@ -13,6 +13,17 @@ function App() {
   const [mostLikesYTSep, setMostLikesYTSep] = useState("");
   const [mostViewsYTSep, setMostViewsYTSep] = useState([]);
   const [mostPopuCategory, setMostPopucategory] = useState([]);
+  const [currentSocialMedia, setCurrentSocialMedia] = useState("Youtube");
+
+  const setToYT = () => {
+    setCurrentSocialMedia("Youtube");
+  };
+  const setToInsta = () => {
+    setCurrentSocialMedia("Instagram");
+  };
+  const setToTick = () => {
+    setCurrentSocialMedia("TickTok");
+  };
 
   const getMostLikesYt = (req, res) => {
     // if(month == Sep && youtube )
@@ -47,55 +58,63 @@ function App() {
   };
 
   const getPopularCategoryYt = (req, res) => {
-    axios.get("http://localhost:5000/api/popularByCategoryYTSep").then((response) => {
-      let data = response.data;
-      setMostPopucategory(data);
-    });
-  }
-// -----------------------------------------------------------------------------------------------------
+    axios
+      .get("http://localhost:5000/api/popularByCategoryYTSep")
+      .then((response) => {
+        let data = response.data;
+        setMostPopucategory(data);
+      });
+  };
+  // -----------------------------------------------------------------------------------------------------
 
   const getMostSubscribersIns = (req, res) => {
-    axios.get("http://localhost:5000/api/mostSubscribersInsSep").then((response) => {
-      let data = response.data;
-      setMostPopucategory(data);
-    });
-  }
+    axios
+      .get("http://localhost:5000/api/mostSubscribersInsSep")
+      .then((response) => {
+        let data = response.data;
+        setMostPopucategory(data);
+      });
+  };
   const getMostEngagementIns = (req, res) => {
-    axios.get("http://localhost:5000/api/mostEngagementInsSep").then((response) => {
+    axios
+      .get("http://localhost:5000/api/mostEngagementInsSep")
+      .then((response) => {
+        let data = response.data;
+        setMostPopucategory(data);
+      });
+  };
+
+  // ---------------------------------------------------------------------------------------------------------
+
+  const getMostSubscribersTT = (req, res) => {
+    axios
+      .get("http://localhost:5000/api/mostSubscribersTTSep")
+      .then((response) => {
+        let data = response.data;
+        setMostPopucategory(data);
+      });
+  };
+  const getMostViewsTT = (req, res) => {
+    axios.get("http://localhost:5000/api/mostViewsTTSep").then((response) => {
       let data = response.data;
       setMostPopucategory(data);
     });
-  }
+  };
+  const getMostLikesTT = (req, res) => {
+    axios.get("http://localhost:5000/api/mostLikesTTSep").then((response) => {
+      let data = response.data;
+      setMostPopucategory(data);
+    });
+  };
+  const getMostCommentsTT = (req, res) => {
+    axios
+      .get("http://localhost:5000/api/mostCommentsTTSep")
+      .then((response) => {
+        let data = response.data;
+        setMostPopucategory(data);
+      });
+  };
 
-// ---------------------------------------------------------------------------------------------------------
-  
-const getMostSubscribersTT = (req, res) => {
-  axios.get("http://localhost:5000/api/mostSubscribersTTSep").then((response) => {
-    let data = response.data;
-    setMostPopucategory(data);
-  });
-}
-const getMostViewsTT = (req, res) => {
-  axios.get("http://localhost:5000/api/mostViewsTTSep").then((response) => {
-    let data = response.data;
-    setMostPopucategory(data);
-  });
-}
-const getMostLikesTT = (req, res) => {
-  axios.get("http://localhost:5000/api/mostLikesTTSep").then((response) => {
-    let data = response.data;
-    setMostPopucategory(data);
-  });
-}
-const getMostCommentsTT = (req, res) => {
-  axios.get("http://localhost:5000/api/mostCommentsTTSep").then((response) => {
-    let data = response.data;
-    setMostPopucategory(data);
-  });
-}
-
-  
-  
   // define set month to september using states
 
   // const names = ["James", "John", "Paul", "Ringo", "George"];
@@ -103,134 +122,155 @@ const getMostCommentsTT = (req, res) => {
   return (
     <div className="App">
       <header className="App-header">
-        <button
-          type="button"
-          class="btn btn-primary"
-          style={{ marginBottom: 10 }}
-          onClick={getMostLikesYt}
-        >
-          MostLikes
-        </button>
-        <button
-          type="button"
-          class="btn btn-primary"
-          style={{ marginTop: 10 }}
-          onClick={getMostCommentsYt}
-        >
-          MostComments
-        </button>
-        <button
-          type="button"
-          class="btn btn-primary"
-          style={{ marginTop: 10 }}
-          onClick={getMostSubscribersYt}
-        >
-          MostSubscribers
-        </button>
-        <button
-          type="button"
-          class="btn btn-primary"
-          style={{ marginTop: 10 }}
-          onClick={getMostViewsYt}
-        >
-          MostViews
-        </button>
-        {/* <button type="button" class="btn btn-primary" style={{marginTop: 10}} onClick={getMostSubscribersYt}>MostSubscribers</button> */}
-        <button
-          type="button"
-          class="btn btn-primary"
-          style={{ marginTop: 10 }}
-          onClick={getMostLandCYt}
-        >
-          MostLikesandComments
-        </button>
-        <button
-          type="button"
-          class="btn btn-primary"
-          style={{ marginTop: 10 }}
-          onClick={getPopularCategoryYt}
-        >
-          MostPopuCategory
-        </button>
+        <div>
+          <DropdownButton
+            id="dropdown-basic-button"
+            title="Select Social Media"
+          >
+            <Dropdown.Item href="/api/mostLikesYTSep" onClick={setToYT}>
+              Youtube
+            </Dropdown.Item>{" "}
+            {/* Here instead of getMostLikesYt do setMonthToSeptember  */}
+            <Dropdown.Item href="#/action-2" onClick={setToInsta}>
+              Instagram
+            </Dropdown.Item>
+            <Dropdown.Item href="#/action-3" onClick={setToTick}>
+              TickTok
+            </Dropdown.Item>
+          </DropdownButton>
+        </div>
 
-        {/* --------------------------------------------------------------------------------- */}
-        <button
-          type="button"
-          class="btn btn-primary"
-          style={{ marginTop: 10 }}
-          onClick={getMostSubscribersIns}
-        >
-          MostSubscribersIns
-        </button>
-        <button
-          type="button"
-          class="btn btn-primary"
-          style={{ marginTop: 10 }}
-          onClick={getMostEngagementIns}
-        >
-          MostEngagementIns
-        </button>
+        {currentSocialMedia === "Youtube" && (
+          <div>
+            <button
+              type="button"
+              class="btn btn-primary"
+              style={{ marginBottom: 10 }}
+              onClick={getMostLikesYt}
+            >
+              MostLikes
+            </button>
+            <button
+              type="button"
+              class="btn btn-primary"
+              style={{ marginTop: 10 }}
+              onClick={getMostCommentsYt}
+            >
+              MostComments
+            </button>
+            <button
+              type="button"
+              class="btn btn-primary"
+              style={{ marginTop: 10 }}
+              onClick={getMostSubscribersYt}
+            >
+              MostSubscribers
+            </button>
+            <button
+              type="button"
+              class="btn btn-primary"
+              style={{ marginTop: 10 }}
+              onClick={getMostViewsYt}
+            >
+              MostViews
+            </button>
+            {/* <button type="button" class="btn btn-primary" style={{marginTop: 10}} onClick={getMostSubscribersYt}>MostSubscribers</button> */}
+            <button
+              type="button"
+              class="btn btn-primary"
+              style={{ marginTop: 10 }}
+              onClick={getMostLandCYt}
+            >
+              MostLikesandComments
+            </button>
+            <button
+              type="button"
+              class="btn btn-primary"
+              style={{ marginTop: 10 }}
+              onClick={getPopularCategoryYt}
+            >
+              MostPopuCategory
+            </button>
 
-{/* ------------------------------------------------------------------------------------------------ */}
-
-        <button
-          type="button"
-          class="btn btn-primary"
-          style={{ marginTop: 10 }}
-          onClick={getMostSubscribersTT}
-        >
-          MostSubscribersTT
-        </button>
-        <button
-          type="button"
-          class="btn btn-primary"
-          style={{ marginTop: 10 }}
-          onClick={getMostViewsTT}
-        >
-          MostViewsTT
-        </button>
-        <button
-          type="button"
-          class="btn btn-primary"
-          style={{ marginTop: 10 }}
-          onClick={getMostLikesTT}
-        >
-          MostLikesTT
-        </button>
-        <button
-          type="button"
-          class="btn btn-primary"
-          style={{ marginTop: 10 }}
-          onClick={getMostCommentsTT}
-        >
-          MostCommentsTT
-        </button>
-
-
-        {/* <strong>{mostViewsYTSep}</strong> */}
-        {/* render most views */}
-
-
-        {mostViewsYTSep.map((youtuber) => (
+            {mostViewsYTSep.map((youtuber) => (
           <div>
             <strong>Youtuber: {youtuber.Youtuber}, </strong>
             <strong>Avg Views: {youtuber.AvgComments}</strong>
           </div>
         ))}
+          </div>
+        )}
 
-        {mostPopuCategory.map((category) => (<div><strong>{category._id}</strong></div>))}
+        {/* --------------------------------------------------------------------------------- */}
 
+        {currentSocialMedia === "Instagram" && (
+          <div>
+            <button
+              type="button"
+              class="btn btn-primary"
+              style={{ marginTop: 10 }}
+              onClick={getMostSubscribersIns}
+            >
+              MostSubscribersIns
+            </button>
+            <button
+              type="button"
+              class="btn btn-primary"
+              style={{ marginTop: 10 }}
+              onClick={getMostEngagementIns}
+            >
+              MostEngagementIns
+            </button>
+          </div>
+        )}
+        {/* ------------------------------------------------------------------------------------------------ */}
 
-        <div>
-          <DropdownButton id="dropdown-basic-button" title="Select Month">
-            <Dropdown.Item href="/api/mostLikesYTSep" onClick={getMostLikesYt}>
-              September
-            </Dropdown.Item>{" "}
-            {/* Here instead of getMostLikesYt do setMonthToSeptember  */}
-            <Dropdown.Item href="#/action-2">Another action</Dropdown.Item>
-            <Dropdown.Item href="#/action-3">Something else</Dropdown.Item>
-          </DropdownButton>
-        </div>
+        {currentSocialMedia === "TickTok" && (
+          <div>
+            <button
+              type="button"
+              class="btn btn-primary"
+              style={{ marginTop: 10 }}
+              onClick={getMostSubscribersTT}
+            >
+              MostSubscribersTT
+            </button>
+            <button
+              type="button"
+              class="btn btn-primary"
+              style={{ marginTop: 10 }}
+              onClick={getMostViewsTT}
+            >
+              MostViewsTT
+            </button>
+            <button
+              type="button"
+              class="btn btn-primary"
+              style={{ marginTop: 10 }}
+              onClick={getMostLikesTT}
+            >
+              MostLikesTT
+            </button>
+            <button
+              type="button"
+              class="btn btn-primary"
+              style={{ marginTop: 10 }}
+              onClick={getMostCommentsTT}
+            >
+              MostCommentsTT
+            </button>
+          </div>
+        )}
+        {/* <strong>{mostViewsYTSep}</strong> */}
+        {/* render most views */}
+
+       
+
+        {mostPopuCategory.map((category) => (
+          <div>
+            <strong>{category._id}</strong>
+          </div>
+        ))}
       </header>
     </div>
   );

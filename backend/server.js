@@ -24,7 +24,7 @@ app.use('/api/mostCommentsYTSep', require('./routes/YTSep/mostCommentsYTSep'));
 app.use('/api/mostViewsYTSep', require('./routes/YTSep/mostViewsYTSep'));
 app.use('/api/mostSubscribersYTSep', require('./routes/YTSep/mostSubscribersYTSep'));
 app.use('/api/mostLandCYTSep', require('./routes/YTSep/mostLandCYTSep'));
-app.use('/api/popularByCategory', require('./routes/YTSep/popularByCategoryYTSep'));
+app.use('/api/popularByCategoryYTSep', require('./routes/YTSep/popularByCategoryYTSep'));
 
 app.use('/api/mostSubscribersInsSep', require('./routes/InsSep/mostSubscribersInsSep'));
 app.use('/api/mostEngagementInsSep', require('./routes/InsSep/mostEngagementInsSep'));
