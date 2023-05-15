@@ -3,14 +3,13 @@ const express = require("express");
 const router = express.Router();
 const InstagramSep22 = require("../../models/InstagramSep22")
 
-router.get('/', async (req, res) => {
+router.post('/', async (req, res) => {
     // let result = YoutubeSep22.find({});
     const docs = await InstagramSep22.find({"Subscribers": {$gte : 10}}).sort({"subscribers": -1}).limit(3).select('Name Subscribers -_id');
     
     
-    // doc_relevant = docs.AvgViews.AvgViews
-
-    console.log(docs);
+    // to access the current category
+    console.log(req.body.currentCategory);
     res.json(docs)
     // YoutubeSep22.find({}).then((err, person) =>{
     //     if (err) return (err);

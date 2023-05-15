@@ -3,14 +3,14 @@ const express = require("express");
 const router = express.Router();
 const YoutubeSep22 = require("../../models/YoutubeSep22")
 
-router.get('/', async (req, res) => {
+router.post('/', async (req, res) => {
     // let result = YoutubeSep22.find({});
     const docs = await YoutubeSep22.find({"AvgLikes": {$gte : 5}}).sort({"AvgLikes": -1}).limit(3).select('Youtuber AvgLikes -_id');
     
 
     // doc_relevant = docs.AvgViews.AvgViews
 
-    console.log(docs);
+    console.log(req.body.currentCategory);
     res.json(docs)
     // YoutubeSep22.find({}).then((err, person) =>{
     //     if (err) return (err);
