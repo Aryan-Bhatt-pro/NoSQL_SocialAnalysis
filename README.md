@@ -4,6 +4,8 @@ In the repo, type `npm install` to install the node dependencies.<br/>
 Then you can run `npm run` to run the project (React frontend).<br/>
 Then go to the backend folder and run nodemon server.js to run the server.<br/>
 Now you can use the web application.
+[Youtube Link](https://www.youtube.com/watch?v=KJDdh0dqIm8)
+[Slide Link](https://iiitbac-my.sharepoint.com/:p:/g/personal/hasanabbas_momin_iiitb_ac_in/EWxyygQTv5BOuABazi0S-kMBGsOj2oqcwsPTiwYfNAkaqQ?e=8Qudgm)
 # Getting Started with Create React App
 
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
